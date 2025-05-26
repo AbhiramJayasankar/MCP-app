@@ -4,17 +4,56 @@ This document outlines the recent progress and current focus of the project for 
 
 ---
 
-## Completed Tasks ✅
+## ✅ Completed Tasks
 
-* **Explored Anthropic's API:** Initial investigation and experimentation with Anthropic's API capabilities.
-* **Switched to Gemini API:** Transitioned from Anthropic's API to Google's Gemini API, primarily due to cost considerations.
-* **Developed Python Script for Gemini:** Created a basic Python program to interact with and send messages to the Gemini API.
-* **Evaluated Google ADK:** Spent time trying out the Google ADK (Android Development Kit) for relevant project components.
+### 🖥️ Developed FastAPI Backend for Ollama
+
+* Created a Python-based backend using FastAPI to serve local Ollama models through an OpenAI-compatible API.
+* Designed specifically for integration with OpenWebUI.
+
+### 📦 Implemented `/v1/models` Endpoint
+
+* Lists available models from the connected Ollama instance.
+* Formats model list for compatibility with OpenWebUI.
+
+### 💬 Implemented `/v1/chat/completions` Endpoint
+
+* Core chat functionality endpoint.
+* Supports both regular and streaming responses.
+* Translates message formats between OpenAI API standards and Langchain/Ollama expectations.
+
+### 🌐 Integrated CORS Support
+
+* Added CORS middleware to FastAPI.
+* Resolved preflight `OPTIONS` request issues, enabling smooth communication from the OpenWebUI frontend.
+
+### 🐞 Iterative Backend Debugging
+
+* **422 Unprocessable Entity Errors:** Fixed by refining Pydantic models (e.g., accepting `model_id`).
+* **Pydantic NameError:** Resolved naming issue with private fields.
+* **Model Parsing Logic:** Corrected logic for parsing model list from `ollama` Python client.
+
+### 🧪 Added and Tested with a Dummy Model
+
+* Implemented a static-response test model.
+* Confirmed that OpenWebUI correctly routes requests to the FastAPI backend.
+
+### 🔁 Achieved Successful Backend ↔ OpenWebUI Communication
+
+* Verified through server logs that:
+
+  * OpenWebUI fetches the model list.
+  * Chat requests are processed and responded to by the backend.
+  * Responses return with `200 OK`.
 
 ---
 
-## Current Focus 🚧
+## 🚧 Current Focus
 
-* **Debugging "{"error": "source code string cannot contain null bytes"}" Error:** Currently troubleshooting an error related to null bytes in the source code. 
+### ✅ Verifying Full Chat Functionality with Real Ollama Models
 
----
+* Testing seamless interaction with actual models (e.g., Gemma, Llama3) through the FastAPI backend.
+
+### 📌 Ensuring Consistent Model Routing
+
+* Confirming OpenWebUI consistently routes all relevant requests through the FastAPI backend rather than its default Ollama connection.
